@@ -10,6 +10,13 @@ import Nav from '@/components/Nav';
 const MediSage = () => {
   const [inputValue, setInputValue] = useState('');
 
+  const examples = [
+    "&quot;Here&apos;s my MRI report, can you review it and provide insights?&quot;",
+    "&quot;Can you compare my blood test from 6 months ago with the recent one?&quot;",
+    "&quot;I have nausea, fatigue, and loss of appetite. Could this be a sign of something serious?&quot;",
+  ];
+  
+
 
   const FeatureCard = ({ title, children }) => (
     <Card className="w-full">
@@ -56,15 +63,11 @@ const MediSage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <FeatureCard title="Example">
               <div className="space-y-4">
-                <p className="p-3 bg-gray-50 rounded-lg">
-                  "Here's my MRI report, can you review it and provide insights?"
-                </p>
-                <p className="p-3 bg-gray-50 rounded-lg">
-                  "Can you compare my blood test from 6 months ago with the recent one?"
-                </p>
-                <p className="p-3 bg-gray-50 rounded-lg">
-                  "I have nausea, fatigue, and loss of appetite. Could this be a sign of something serious?"
-                </p>
+              <FeatureCard title="Example">
+  {examples.map((example, index) => (
+    <p key={index} className="p-3 bg-gray-50 rounded-lg" dangerouslySetInnerHTML={{ __html: example }}></p>
+  ))}
+</FeatureCard>
               </div>
             </FeatureCard>
 

@@ -1,19 +1,10 @@
-import React from 'react';
-import dynamic from 'next/dynamic';
-// import { AreaChart, Area, XAxis, YAxis, ResponsiveContainer } from 'recharts';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { BarChart2, MessageSquare, FileText, Settings, User, Heart, Upload, Plus, LucideIcon } from 'lucide-react';
-import Nav from '@/components/Nav';
-
-const data = [
-  { name: 'Jan', value: 0.4 },
-  { name: 'Feb', value: 0.5 },
-  { name: 'Mar', value: 3.6 },
-  { name: 'Apr', value: 0.8 },
-  { name: 'May', value: 0.3 },
-];
+import React from "react";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { MessageSquare, User, Heart, Upload, Plus, LucideIcon } from "lucide-react";
+import Nav from "@/components/Nav";
+import Image from "next/image";
 
 interface MetricCardProps {
   value: string;
@@ -36,29 +27,10 @@ const MetricCard: React.FC<MetricCardProps> = ({ value, unit, label, color, icon
   </Card>
 );
 
-// const AreaChart = dynamic(() => 
-//   import('@/components/charts/AreaChart'),
-//  { 
-//   ssr: false 
-// });
-
 const DashboardView = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="flex">
-        {/* Sidebar */}
-        {/* <div className="w-16 bg-white border-r flex flex-col items-center py-6 space-y-8">
-          <div className="w-8 h-8 bg-lime-200 rounded-full flex items-center justify-center">
-            <BarChart2 className="w-5 h-5" />
-          </div>
-          <MessageSquare className="w-6 h-6 text-gray-400" />
-          <FileText className="w-6 h-6 text-gray-400" />
-          <Settings className="w-6 h-6 text-gray-400" />
-          <div className="mt-auto">
-            <User className="w-6 h-6 text-gray-400" />
-          </div>
-        </div> */}
-
         <Nav />
 
         {/* Main Content */}
@@ -80,16 +52,17 @@ const DashboardView = () => {
           <div className="grid grid-cols-12 gap-6">
             {/* Left Column - Doctor Illustration */}
             <div className="col-span-3">
-              <img src="/path-to-your-image/placeholder.png" alt="Doctor illustration" className="w-full" />
+              <Image
+                src="/path-to-your-image/placeholder.png"
+                alt="Doctor illustration"
+                width={300}
+                height={300}
+                className="w-full"
+              />
             </div>
 
             {/* Right Column - Charts and Metrics */}
             <div className="col-span-9 space-y-6">
-              {/* Chart Section */}
-              {/* <div className="h-48">
-                <AreaChart />
-              </div> */}
-
               {/* Metrics Grid */}
               <div className="grid grid-cols-2 gap-4">
                 <MetricCard value="65" unit="bpm" label="Heart Rate" color="bg-red-400" icon={Heart} />
@@ -107,7 +80,7 @@ const DashboardView = () => {
                   <div className="flex-1">
                     <h3 className="font-bold mb-2">Wellness AI Chatbot</h3>
                     <p className="bg-lime-200 p-4 rounded-lg text-sm">
-                      Ask me anything about your medical reports or health tips—I'm here to make your life easier and healthier! 😊
+                      Ask me anything about your medical reports or health tips—I&apos;m here to make your life easier and healthier! 😊
                     </p>
                   </div>
                 </div>
@@ -125,9 +98,12 @@ const DashboardView = () => {
                   <div className="flex items-center gap-4">
                     <Upload className="w-6 h-6" />
                     <div>
-                      <h3 className="font-bold">Gain deeper insights and precision in understanding your health</h3>
+                      <h3 className="font-bold">
+                        Gain deeper insights and precision in understanding your health
+                      </h3>
                       <p className="text-sm text-gray-500">
-                        Analyze your reports effortlessly and stay ahead of any risks by uploading them regularly for the most accurate and up-to-date analysis!
+                        Analyze your reports effortlessly and stay ahead of any risks by uploading them
+                        regularly for the most accurate and up-to-date analysis!
                       </p>
                     </div>
                   </div>
