@@ -1,5 +1,7 @@
-const nextConfig = {
-  webpack: (config, { isServer }) => {
+import { NextConfig } from 'next'; // Import NextConfig if needed for typing.
+
+const nextConfig: NextConfig = {
+  webpack: (config: any, { isServer }: { isServer: boolean }) => {
     if (!isServer) {
       config.module.rules.push({
         test: /\.js$/,
@@ -19,4 +21,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
