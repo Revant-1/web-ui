@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { MessageSquare, User, Heart, Upload, Plus, LucideIcon } from "lucide-react";
 import Nav from "@/components/Nav";
 import Image from "next/image";
+import Link from "next/link";
 
 interface MetricCardProps {
   value: string;
@@ -52,14 +53,15 @@ const DashboardView = () => {
           <div className="grid grid-cols-12 gap-6">
             {/* Left Column - Doctor Illustration */}
             <div className="col-span-3">
-              <Image
-                src="/path-to-your-image/placeholder.png"
-                alt="Doctor illustration"
-                width={300}
-                height={300}
-                className="w-full"
-              />
+            <Image
+             src={"https://i.postimg.cc/pTjb6r6L/image-removebg-preview.png".trimEnd()}
+             alt="Doctor illustration"
+             width={300}
+             height={300}
+             className="w-full"
+             />
             </div>
+
 
             {/* Right Column - Charts and Metrics */}
             <div className="col-span-9 space-y-6">
@@ -78,10 +80,12 @@ const DashboardView = () => {
                     <MessageSquare className="w-5 h-5" />
                   </div>
                   <div className="flex-1">
+                    <Link href="/chat">
                     <h3 className="font-bold mb-2">Wellness AI Chatbot</h3>
                     <p className="bg-lime-200 p-4 rounded-lg text-sm">
                       Ask me anything about your medical reports or health tips—I&apos;m here to make your life easier and healthier! 😊
                     </p>
+                    </Link>
                   </div>
                 </div>
                 <div className="flex gap-2">

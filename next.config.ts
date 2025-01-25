@@ -1,5 +1,5 @@
 const nextConfig = {
-  webpack: (config: { module: { rules: { test: RegExp; include: RegExp; use: { loader: string; options: { presets: string[]; }; }; }[]; }; }, { isServer }: any) => {
+  webpack: (config, { isServer }) => {
     if (!isServer) {
       config.module.rules.push({
         test: /\.js$/,
@@ -14,5 +14,9 @@ const nextConfig = {
     }
     return config;
   },
+  images: {
+    domains: ['i.postimg.cc'],
+  },
 };
+
 module.exports = nextConfig;
