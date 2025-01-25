@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import {  User, Camera, Paperclip, Loader2, Send } from "lucide-react";
+import { User, Camera, Paperclip, Loader2, Send } from "lucide-react";
 import Nav from "@/components/Nav";
 import Link from "next/link";
 
@@ -30,18 +30,18 @@ const MediSage = () => {
     },
   ];
 
-  const handleExampleClick = (example: string) => {
+  const handleExampleClick = (example) => {
     setInputValue(example);
   };
 
   const sendMessage = async () => {
     if (!inputValue.trim()) return;
-  
+
     const userMessage = { sender: "user", text: inputValue };
     setMessages((prev) => [...prev, userMessage]);
     setInputValue("");
     setIsLoading(true);
-  
+
     try {
       const response = await fetch("http://localhost:3001/api/chat", {
         method: "POST",
@@ -50,23 +50,23 @@ const MediSage = () => {
         },
         body: JSON.stringify({
           message: inputValue,
-          history: messages.map(msg => ({
-            role: msg.sender === "user" ? "user" : "model",  // Changed from 'assistant' to 'model'
-            content: msg.text
-          }))
+          history: messages.map((msg) => ({
+            role: msg.sender === "user" ? "user" : "model",
+            content: msg.text,
+          })),
         }),
       });
-  
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-  
+
       const data = await response.json();
-      
+
       if (data.error) {
         throw new Error(data.error);
       }
-      
+
       setMessages((prev) => [
         ...prev,
         { sender: "gemini", text: data.response },
@@ -82,12 +82,12 @@ const MediSage = () => {
             : "I apologize, but I encountered an error. Please try again.",
         },
       ]);
-    }finally {
+    } finally {
       setIsLoading(false);
     }
   };
-  
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+
+  const handleKeyPress = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       sendMessage();
@@ -96,9 +96,9 @@ const MediSage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-lime-50 to-gray-50">
-      <div className="flex h-screen">
+      <div className="flex flex-col md:flex-row h-screen">
         {/* Sidebar */}
-        <div className="w-64 bg-white shadow-lg">
+        <div className="w-full md:w-64 bg-white shadow-lg flex-shrink-0">
           <div className="p-6">
             <Link href="/home">
               <div className="flex items-center gap-3">
@@ -115,10 +115,10 @@ const MediSage = () => {
         </div>
 
         {/* Main content */}
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col overflow-hidden">
           {/* Header */}
           <div className="p-6 bg-white shadow-sm">
-            <div className="max-w-4xl mx-auto">
+            <div className="max-w-4xl mx-auto text-center md:text-left">
               <h1 className="text-2xl font-bold text-gray-800 mb-2">
                 Your Personal Health Assistant
               </h1>
@@ -129,7 +129,7 @@ const MediSage = () => {
           </div>
 
           {/* Chat container */}
-          <div className="flex-1 overflow-hidden flex flex-col max-w-4xl mx-auto w-full p-6">
+          <div className="flex-1 overflow-hidden flex flex-col max-w-4xl mx-auto w-full p-4 md:p-6">
             {/* Messages */}
             <div className="flex-1 overflow-y-auto space-y-4 pb-4">
               {messages.map((message, index) => (
@@ -166,7 +166,7 @@ const MediSage = () => {
                   <div
                     key={index}
                     onClick={() => handleExampleClick(example.text)}
-                    className="bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+                    className="bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow cursor-pointer text-center"
                   >
                     <div className="text-2xl mb-2">{example.icon}</div>
                     <p className="text-gray-600 text-sm">{example.text}</p>
