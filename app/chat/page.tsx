@@ -77,10 +77,12 @@ const MediSage = () => {
         ...prev,
         {
           sender: "system",
-          text: error.message || "I apologize, but I encountered an error. Please try again.",
+          text: error instanceof Error
+            ? error.message
+            : "I apologize, but I encountered an error. Please try again.",
         },
       ]);
-    } finally {
+    }finally {
       setIsLoading(false);
     }
   };
